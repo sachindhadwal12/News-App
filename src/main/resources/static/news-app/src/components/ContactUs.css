@@ -1,0 +1,10 @@
+p {
+    text-align: justify;
+}
+
+.inner-container {
+    border: 1px solid white;
+    padding: 1vw;
+    margin: 0.5vw 0.25vw;
+}
+

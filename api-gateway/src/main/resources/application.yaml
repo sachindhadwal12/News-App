@@ -1,0 +1,46 @@
+server:
+  port: 9094
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+spring:
+  application:
+    name: api-gateway
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          lower-case-service-id: true
+      routes:
+        - id: auth-service
+          uri: http://localhost:9090
+          Predicates:
+            - Path=/api/v1/auth/**
+        - id: news-service
+          uri: http://localhost:9091
+          Predicates:
+            - Path=/api/v1/news/**
+        - id: wish-list-service
+          uri: http://localhost:9092
+          Predicates:
+            - Path=/api/v1/wishlist/**
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:9090"
+              - "http://localhost:9091"
+              - "http://localhost:9092"
+              - "http://localhost:9093"
+              - "http://localhost:9094"
+            allowedMethods:
+              - GET
+              - POST
+            allowedHeaders: "*"
+            allowCredentials: true
+            maxAge: 3600

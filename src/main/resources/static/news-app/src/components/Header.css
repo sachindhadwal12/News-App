@@ -1,0 +1,6 @@
+.header{
+    background-image: url('../../public/images/news_header.jpg');
+    background-repeat:repeat;
+    font-weight: bold;
+    font-family: Cursive, "Lucida Console", "Courier New", monospace;
+}
